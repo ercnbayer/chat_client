@@ -11,22 +11,15 @@ int fd=*server_socket;
 char recv_buf[256];
 while(1)
 {
-
-//
-//printf("hello world");
-//scanf("%s",send_buf);
-
-int r =recv(fd,recv_buf,int(sizeof(recv_buf)),0);
-
-
-printf("%s",recv_buf);
-memset(recv_buf,0,sizeof(recv_buf));
-if(r<0)
-{
+  int r =recv(fd,recv_buf,int(sizeof(recv_buf)),0);
+  printf("%s",recv_buf);
+  memset(recv_buf,0,sizeof(recv_buf));
+  if(r<0)
+  {
     printf("couldnt connect");
     printf(" err  val %s %d ",strerror(errno),errno);
     break;
-}
+  }
 
 }
 free(server_socket);
@@ -37,27 +30,23 @@ void *sendMessage(void *pclient)
   int *server_socket=(int*)pclient;
   int fd=*server_socket;
   char *send_buf=(char*)malloc(sizeof(char)*255+1);
-
   while(1)
   {
-      char  senbuf[255];
-      scanf("%s",senbuf);
-  
-   strcpy(send_buf,senbuf);   
+    char  senbuf[255];
+    scanf("%s",senbuf);
+    strcpy(send_buf,senbuf);   
     int r=send(fd,send_buf,int(strlen(send_buf)),0);
     printf("%d",strlen(send_buf));
-      memset(send_buf,0,sizeof(send_buf));
-      //ssprintf("%d",strlen(send_buf));
+    memset(send_buf,0,sizeof(send_buf));
     if(r<0)
     {
-          printf(" err  val %s %d ",strerror(errno),errno);
-
-          break;
-    }
-  }
+      printf(" err  val %s %d ",strerror(errno),errno);
+      break;
+    } 
+  }  
   free(server_socket);
-  return NULL;
-}
+  return NULL;     
+}          
 int main ()
 { 
   int TCPServerSocket; 
@@ -74,15 +63,7 @@ int main ()
   }
   pthread_t recieve,sendm;
   connect(TCPServerSocket,(sockaddr*)&TCPServerAdd,sizeof(TCPServerAdd)); 
-  
-
-
-    
-
-    //cout<<"socket ailesi"<<TCPClientAdd.sin_family;
-      
-    
-     if(TCPServerSocket>-1)
+  if(TCPServerSocket>-1)
   {
     int*psend;
     psend=(int*)malloc(sizeof(TCPServerSocket));
@@ -111,7 +92,24 @@ int main ()
   }
   close(TCPServerSocket);
   return 0;
-}      
+}    
+
+  
+  
+ 
+
+
+
+
+
+
+    
+      
+    
+  
+  
+  
+     
     
 
   
